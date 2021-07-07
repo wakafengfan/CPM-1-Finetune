@@ -3,3 +3,8 @@ upload.sh
 results/
 results-local
 __pycache__
+.idea
+.DS_Store
+*.iml
+*.egg-info
+*.pyc

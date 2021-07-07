@@ -1,7 +1,7 @@
 #!/bin/bash
 
-DATA_DIR="/data/STC/preprocessed/"
-CHECKPOINT_PATH="/data/checkpoints/CPM-large"
+DATA_DIR="data/STC"
+CHECKPOINT_PATH="data/checkpoints/CPM-large"
 RESULTS_DIR="results/"
 MODEL_NAME="finetune-dial-large-fp32"
 TOKENIZER_PATH="bpe_3w_new/"
