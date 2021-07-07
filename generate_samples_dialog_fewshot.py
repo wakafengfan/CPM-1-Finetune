@@ -307,12 +307,13 @@ def main():
     tokenizer = GPT2Tokenizer(os.path.join(args.tokenizer_path, 'vocab.json'),
                               os.path.join(args.tokenizer_path, 'chinese_vocab.model'))
 
+    args.train_iters = 1
+
     # Model, optimizer, and learning rate.
     model = setup_model_and_optimizer_wo_parallel(args)[0]
 
     #setting default batch size to 1
     args.batch_size = 1
-    args.train_iters = 1
 
     # read STC test set
     with open(args.data_dir + 'STC_test.json', 'r') as f_test:
