@@ -312,6 +312,7 @@ def main():
 
     #setting default batch size to 1
     args.batch_size = 1
+    args.train_iters = 1
 
     # read STC test set
     with open(args.data_dir + 'STC_test.json', 'r') as f_test:
