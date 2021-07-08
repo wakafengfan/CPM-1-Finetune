@@ -255,32 +255,54 @@ def get_model_wo_parallel(args):
     return model
 
 
-
 def setup_model_and_optimizer_wo_parallel(args):
     """Setup model and optimizer."""
 
     model = get_model_wo_parallel(args)
-    optimizer = get_optimizer(model, args)
-    lr_scheduler = get_learning_rate_scheduler(optimizer, args)
 
     if args.deepspeed:
         print_rank_0("DeepSpeed is enabled.")
 
-        model, optimizer, _, lr_scheduler = deepspeed.initialize(
+        model, _ = deepspeed.initialize(
             model=model,
-            optimizer=optimizer,
             args=args,
-            lr_scheduler=lr_scheduler,
             mpu=mpu,
             dist_init_required=False
         )
 
     if args.load is not None:
-        args.iteration = load_checkpoint(model, optimizer, lr_scheduler, args)
+        args.iteration = load_checkpoint(model, optimizer=None, lr_scheduler=None, args=args)
     else:
         args.iteration = 0
 
-    return model, optimizer, lr_scheduler
+    return model, None, None
+
+
+# def setup_model_and_optimizer_wo_parallel(args):
+#     """Setup model and optimizer."""
+#
+#     model = get_model_wo_parallel(args)
+#     optimizer = get_optimizer(model, args)
+#     lr_scheduler = get_learning_rate_scheduler(optimizer, args)
+#
+#     if args.deepspeed:
+#         print_rank_0("DeepSpeed is enabled.")
+#
+#         model, optimizer, _, lr_scheduler = deepspeed.initialize(
+#             model=model,
+#             optimizer=optimizer,
+#             args=args,
+#             lr_scheduler=lr_scheduler,
+#             mpu=mpu,
+#             dist_init_required=False
+#         )
+#
+#     if args.load is not None:
+#         args.iteration = load_checkpoint(model, optimizer, lr_scheduler, args)
+#     else:
+#         args.iteration = 0
+#
+#     return model, optimizer, lr_scheduler
 
 
 def main():

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sudo apt install -y locales
+#sudo apt install -y locales
 export LC_ALL=zh_CN.UTF-8
 sudo update-locale LC_ALL="zh_CN.UTF-8"
 locale charmap
